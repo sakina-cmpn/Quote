@@ -1,0 +1,131 @@
+<!-- myquotes.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Quotes</title>
+  <style>
+    body {
+      background-color: black;
+      color: beige;
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      text-align: center;
+    }
+    h1 {
+      color: rgb(241, 201, 114);
+      margin-bottom: 1em;
+    }
+    textarea {
+      width: 80%;
+      max-width: 600px;
+      height: 120px;
+      padding: 1em;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid gray;
+      resize: none;
+    }
+    button {
+      margin-top: 1.5em;
+      padding: 10px 25px;
+      background-color: rgb(91, 69, 91);
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: rgb(61, 41, 61);
+    }
+    .nav-link {
+      margin-top: 2em;
+      display: block;
+      color: lightblue;
+      text-decoration: none;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: beige;
+        padding: 10px 40px;
+        flex-wrap: wrap;
+      }
+      
+      .logo h1 {
+        margin: 0;
+        color: black;
+        font-size: 24px;
+        letter-spacing: 2px;
+      }
+      
+      .menu {
+        display: flex;
+        gap: 2em;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .menu a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+      }
+      
+      .menu a:hover {
+        text-decoration: underline;
+      }
+      
+      .option {
+        cursor: pointer;
+      }
+      
+  </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><h1>JOURNEY ADVISER</h1></div>
+        <ul class="menu">
+          <li type="none" class="option"><a href="interface.html">HOME</a></li>
+          <li type="none" class="option"><a href="myquotes.html">MY QUOTES</a></li>
+          <li type="none" class="option"><a href="saved.html">SAVED QUOTES</a></li>
+        </ul>
+      </header>
+      
+  <h1>Write Your Own Quote</h1>
+
+  <textarea id="customQuote" placeholder="Type your quote here..."></textarea>
+  <br>
+  <button id="saveCustom">Save My Quote</button>
+
+  <a class="nav-link" href="saved.html">View Saved Quotes →</a>
+
+  <script>
+    const saveBtn = document.getElementById('saveCustom');
+    const input = document.getElementById('customQuote');
+
+    saveBtn.addEventListener('click', () => {
+      const quote = input.value.trim();
+      if (quote === '') {
+        alert("Please write a quote.");
+        return;
+      }
+
+      let savedQuotes = JSON.parse(localStorage.getItem('savedQuotes')) || [];
+
+      if (!savedQuotes.includes(quote)) {
+        savedQuotes.push(quote);
+        localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+        alert("Quote saved successfully!");
+        input.value = ''; // Clear textarea
+      } else {
+        alert("This quote is already saved.");
+      }
+    });
+  </script>
+</body>
+</html>
